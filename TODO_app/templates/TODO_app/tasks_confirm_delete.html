@@ -1,0 +1,116 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>delete confirmation</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <form method="POST">{% csrf_token %}-->
+<!--        <h3>are sure you want to delete "{{task}}" task?</h3>-->
+<!--        <button type="submit">Delete</button>-->
+
+<!--        <a href="/tasks_list">-->
+<!--            <button type="submit">No!</button>-->
+<!--        </a>-->
+<!--    </form>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Task View</title>
+</head>
+<style>
+    body {
+	font-family: Arial, sans-serif;
+	background-color: #f4f4f4;
+}
+
+.container {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: #fff;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1{
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.warning{
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.task {
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	margin-bottom: 20px;
+	background-color: #f9f9f9;
+}
+
+.task-title {
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+
+.btn {
+	display: block;
+	width: 100%;
+	max-width: 200px;
+	margin: 0 auto;
+	padding: 10px;
+	background-color: #3377ff;
+	color: #fff;
+	font-size: 18px;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 5px;
+	transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+	background-color: #3e8e41;
+}
+
+.delete-btn{
+    display: block;
+	border:0px;
+	max-width: 200px;
+	margin: 0 auto;
+	padding: 7px;
+	background-color: #3377ff;
+	color: #fff;
+	font-size: 18px;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 5px;
+	transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+	background-color: #c9302c;
+}
+
+</style>
+<body>
+	<div class="container">
+		<h1>Your Task</h1>
+		<div class="task">
+                <form method="POST">{% csrf_token %}
+        <h3 class="warning">Are sure you want to delete "{{task}}" task?</h3>
+
+        <button class="delete-btn" type="submit">Yes! Delete</button>
+
+    </form>
+		</div>
+		<a href="/tasks_list" class="btn">No! Back to Task List</a>
+	</div>
+</body>
+</html>
+

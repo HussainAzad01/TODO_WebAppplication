@@ -1,0 +1,101 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Add Tasks</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<form method="POST" action="">{% csrf_token %}-->
+<!--    {{form.as_p}}-->
+<!--<button type="submit" value="submit">submit</button>-->
+<!--    <a href="/tasks_list">go back</a>-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Update Task</title>
+    <style>
+      /* add some basic styling */
+      body {
+        font-family: Arial, sans-serif;
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+
+      h1 {
+	    text-align: center;
+	    margin-bottom: 20px;
+      }
+
+      .container {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: #fff;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+      input[type="text"], textarea {
+        width: 100%;
+        height:58px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+      }
+      input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+      input[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+
+      .btn {
+	display: block;
+	width: 100%;
+	max-width: 200px;
+	margin: 0 auto;
+	padding: 10px;
+	background-color: #3377ff;
+	color: #fff;
+	font-size: 18px;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 5px;
+	transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+	background-color: #3e8e41;
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Adding a Task</h1>
+    <form action="" method="post">{% csrf_token %}
+      {{form.as_p}}
+      <h4>Due Date:</h4><p>
+      <input type="Date" name="due_date" id="id_due_date"><p>
+      <input type="submit" value="Add Task">
+    </form>
+        <a href="/tasks_list" class="btn">Back to Task List</a>
+      </div>
+  </body>
+</html>
