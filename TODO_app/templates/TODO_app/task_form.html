@@ -75,8 +75,6 @@
       <h1>Updating a Task</h1>
     <form action="" method="post">{% csrf_token %}
       {{form.as_p}}
-      <h4>Due Date:</h4><p>
-      <input type="Date" name="due_date" id="id_due_date"><p>
       <input type="submit" value="Update Task">
     </form>
         <a href="/tasks_list" class="btn">Back to Task List</a>

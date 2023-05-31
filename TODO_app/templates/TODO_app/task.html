@@ -83,11 +83,12 @@ h1 {
             {% endif %}
 			<p class="task-created">Created on: {{tasks_details.created_on}}</p>
 			<p class="task-complete">Status: {{ tasks_details.status }}</p>
-			<p class="task-complete">Due Date: {% if tasks_details.due_date %}</p>
+			{% if tasks_details.due_date %}
+			<p class="task-complete">Due Date:
 			{{ tasks_details.due_date }}
 			{% else %}
 			No due date
-			{% endif %}
+				{% endif %}</p>
 		</div>
 		<a href="/tasks_list" class="btn">Back to Task List</a>
 	</div>

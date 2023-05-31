@@ -1,6 +1,6 @@
 import datetime
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django import forms
 from .models import Tasks
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -86,10 +86,13 @@ class TaskList(LoginRequiredMixin, ListView):
 
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Tasks
-    fields = ['title', 'description', 'tag', 'status']
+    fields = ['title', 'description', 'tag', 'status', 'due_date']
     template_name = 'TODO_app/task_create.html'
     success_url = reverse_lazy('tasks_list')
-
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields['due_date'].widget = forms.DateInput(attrs={'type': 'date'})
+        return form
     def form_valid(self, form): #to add current time in the created_on field
         form.instance.user = self.request.user
         form.instance.created_on = datetime.datetime.now()
@@ -99,9 +102,13 @@ class TaskCreate(LoginRequiredMixin, CreateView):
 
 class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Tasks
-    fields = ['title', 'description', 'tag', 'status']
+    fields = ['title', 'description', 'tag', 'status', 'due_date']
     template_name = 'TODO_app/task_form.html'
     success_url = reverse_lazy('tasks_list')
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields['due_date'].widget = forms.DateInput(attrs={'type': 'date'})
+        return form
 
 class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Tasks
