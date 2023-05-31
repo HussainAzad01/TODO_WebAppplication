@@ -76,7 +76,6 @@ class TaskDetail(LoginRequiredMixin, DetailView):
 
 
 class TaskList(LoginRequiredMixin, ListView):
-
     model = Tasks  # this is model
     context_object_name = 'tasks'# this is params
 

@@ -171,8 +171,8 @@ footer {
         {% for task in tasks %}
         <ul>
           <li>
-            <h4>{{loop.counter}}</h4>
-            <label>{{task.title}}</label>
+            <h6>{{forloop.counter}}). </h6>
+            <label> {{task.title}}</label>
             <div>
             <a href="/task_update/{{task.id}}/">
             <button class="update-btn">Update</button>
