@@ -1,6 +1,41 @@
 # TODO_WebAppplication
 A super handy app to manage all your daily tasks very easily, basically I learned CRUD operations here.
 
+how to setup the code:
+
+Requirements:
+Make sure you have Python installed on your computer. You can download it from the official Python website (https://www.python.org) and follow the installation instructions specific to your operating system.
+
+Download the Code:
+Download the code for the Todo application from the provided source, such as a GitHub repository.
+Extract the downloaded code to a suitable location on your computer.
+Set Up the Virtual Environment:
+Open your command-line interface (e.g., Command Prompt on Windows, Terminal on macOS/Linux).
+
+Install Dependencies:
+Ensure that your virtual environment is activated.
+
+Configure the Database:
+Open the settings.py file in the codebase.
+Locate the database configuration section.
+Update the database settings according to your MySQL database details, such as hostname, port, username, and password.
+Save the changes.
+
+Run Database Migrations:
+In the command-line interface, run the command to apply the database migrations
+
+Run the Application:
+Start the development server by running the command
+The application should start running on a local development server.
+Open your web browser and navigate to the provided URL, usually http://localhost:8000, to access the Todo application.
+
+Explore the Application:
+Use the provided navigation links or buttons to perform various actions in the Todo application, such as signing up, logging in, managing tasks, and logging out.
+Follow the instructions provided in the user interface to interact with the application effectively.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
 how to use this application!
 
 Sign Up:
