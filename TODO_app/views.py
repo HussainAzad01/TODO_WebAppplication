@@ -93,9 +93,15 @@ class TaskCreate(LoginRequiredMixin, CreateView):
         form = super().get_form(form_class)
         form.fields['due_date'].widget = forms.DateInput(attrs={'type': 'date'})
         return form
-    def form_valid(self, form): #to add current time in the created_on field
+
+    def form_valid(self, form):  # to add current time in the created_on field
         form.instance.user = self.request.user
         form.instance.created_on = datetime.datetime.now()
+        due_date = form.cleaned_data['due_date']
+        c_time = datetime.datetime.now(datetime.timezone.utc)
+        if due_date < c_time:
+            form.add_error('due_date', 'Due date must be greater than current date.')
+            return self.form_invalid(form)
         return super(TaskCreate, self).form_valid(form)
 
 
@@ -109,6 +115,14 @@ class TaskUpdate(LoginRequiredMixin, UpdateView):
         form = super().get_form(form_class)
         form.fields['due_date'].widget = forms.DateInput(attrs={'type': 'date'})
         return form
+
+    def form_valid(self, form):
+        due_date = form.cleaned_data['due_date']
+        c_time = datetime.datetime.now(datetime.timezone.utc)
+        if due_date < c_time:
+            form.add_error('due_date', 'Due date must be greater than current date.')
+            return self.form_invalid(form)
+        return super(TaskUpdate, self).form_valid(form)
 
 class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Tasks
