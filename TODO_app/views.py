@@ -13,12 +13,15 @@ from django.contrib.auth.forms import UserCreationForm
 
 last_login = []
 completed_tasks = []
+
+
 # Create your views here.
 def index(request):
     return render(request, 'TODO_app/index.html')
 
+
 def signup_user(request):
-    #getting credentials from the user i.e front end if the condition is true
+    # getting credentials from the user i.e front end if the condition is true
     if request.method == 'POST':
         user_name = request.POST.get('user_name')
         user_email = request.POST.get('user_email')
@@ -38,7 +41,7 @@ def signup_user(request):
                     return redirect('/login')
 
                 else:
-                    #sending warnings according to the condition met
+                    # sending warnings according to the condition met
                     error_message = "Username is too short or password didn't match, Try resolving these mistakes!!"
                     return render(request, 'TODO_app/index.html', {'error_message': error_message})
             else:
@@ -51,17 +54,17 @@ def signup_user(request):
 
 
 def login_user(request):
-    #getting credentials for the login
+    # getting credentials for the login
     if request.method == 'POST':
         user_name = request.POST.get('user_name')
         user_password = request.POST.get('user_password')
         # checking is the user has an account or not
         is_user = authenticate(request, username=user_name, password=user_password)
-        #if he have an account then
+        # if he have an account then
         if is_user is not None:
             login(request, is_user)
             return redirect('/tasks_list')
-        #if he have'nt or hit the wrong credentials
+        # if he have'nt or hit the wrong credentials
         else:
             error_message = "username or password is invalid, Please try with the valid one!!"
             return render(request, 'TODO_app/login.html', {'error_message': error_message})
@@ -70,7 +73,7 @@ def login_user(request):
 
 
 def logout_user(request):
-    #logging out the user and redirecting them to login page
+    # logging out the user and redirecting them to login page
     logout(request)
     return redirect('/login')
 
@@ -91,16 +94,18 @@ class TaskList(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        #to filer the tasks with respect to the user only
+        # to filer the tasks with respect to the user only
         context["tasks"] = context["tasks"].filter(user=self.request.user)
         return context
 
+
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Tasks
-    #these are the fileds that will visible from the front end
+    # these are the fileds that will visible from the front end
     fields = ['title', 'description', 'tag', 'status', 'due_date']
     template_name = 'TODO_app/task_create.html'
     success_url = reverse_lazy('tasks_list')
+
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
         # to change the format of the date, because by django it was set as text
@@ -111,7 +116,7 @@ class TaskCreate(LoginRequiredMixin, CreateView):
         # to add current time in the created_on field
         form.instance.user = self.request.user
         form.instance.created_on = datetime.datetime.now()
-        #logic so that a user can't put the due date before the current date
+        # logic so that a user can't put the due date before the current date
         due_date = form.cleaned_data['due_date']
         c_time = datetime.datetime.now(datetime.timezone.utc)
         if due_date < c_time:
@@ -120,12 +125,12 @@ class TaskCreate(LoginRequiredMixin, CreateView):
         return super(TaskCreate, self).form_valid(form)
 
 
-
 class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Tasks
     fields = ['title', 'description', 'tag', 'status', 'due_date']
     template_name = 'TODO_app/task_form.html'
     success_url = reverse_lazy('tasks_list')
+
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
         form.fields['due_date'].widget = forms.DateInput(attrs={'type': 'date'})
@@ -139,10 +144,9 @@ class TaskUpdate(LoginRequiredMixin, UpdateView):
             return self.form_invalid(form)
         return super(TaskUpdate, self).form_valid(form)
 
+
 class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Tasks
     context_object_name = 'task'
     # to redirect to another page after the success of one deletion
     success_url = reverse_lazy('tasks_list')
-
-
